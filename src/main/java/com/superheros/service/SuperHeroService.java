@@ -43,4 +43,9 @@ public class SuperHeroService implements SuperHeroServiceInterface {
         SuperHero superHeroRetrieved = superHeroRepository.getById(id);
         superHeroRepository.delete(superHeroRetrieved);
     }
+
+    @Override
+    public List<SuperHero> findBySuperHeroNameBy(String query) {
+        return superHeroRepository.findBySuperHeroNameContaining(query);
+    }
 }

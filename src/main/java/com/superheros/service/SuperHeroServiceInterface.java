@@ -10,4 +10,5 @@ public interface SuperHeroServiceInterface {
     SuperHero findById(Long id);
     SuperHero update(Long id, SuperHeroRequest superHeroRequest);
     void delete(Long id);
+    List<SuperHero> findBySuperHeroNameBy(String query);
 }

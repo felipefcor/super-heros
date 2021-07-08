@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/super-heroes")
+@RequestMapping("/super-hero")
 public class SuperHeroController {
 
     @Autowired
@@ -36,10 +36,15 @@ public class SuperHeroController {
         return new ResponseEntity<>(superHeroUpdated, HttpStatus.OK);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         superHeroServiceInterface.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/findBySuperHeroNameBy/{query}")
+    public ResponseEntity<List<SuperHero>> findBySuperHeroNameBy(@PathVariable String query) {
+        List<SuperHero> superHeroList = superHeroServiceInterface.findBySuperHeroNameBy(query);
+        return new ResponseEntity<>(superHeroList, HttpStatus.OK);
     }
 }
