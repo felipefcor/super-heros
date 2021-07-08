@@ -1,7 +1,7 @@
-package com.superheros.controller;
+package com.superhero.controller;
 
-import com.superheros.model.SuperHero;
-import com.superheros.service.SuperHeroServiceInterface;
+import com.superhero.model.SuperHero;
+import com.superhero.service.SuperHeroServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

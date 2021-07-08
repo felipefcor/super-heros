@@ -1,6 +1,6 @@
-package com.superheros.repository;
+package com.superhero.repository;
 
-import com.superheros.model.SuperHero;
+import com.superhero.model.SuperHero;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

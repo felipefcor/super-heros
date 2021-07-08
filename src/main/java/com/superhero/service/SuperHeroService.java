@@ -1,8 +1,8 @@
-package com.superheros.service;
+package com.superhero.service;
 
-import com.superheros.controller.SuperHeroRequest;
-import com.superheros.model.SuperHero;
-import com.superheros.repository.SuperHeroRepository;
+import com.superhero.controller.SuperHeroRequest;
+import com.superhero.model.SuperHero;
+import com.superhero.repository.SuperHeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

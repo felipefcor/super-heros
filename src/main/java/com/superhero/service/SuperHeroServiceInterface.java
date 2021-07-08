@@ -1,7 +1,7 @@
-package com.superheros.service;
+package com.superhero.service;
 
-import com.superheros.controller.SuperHeroRequest;
-import com.superheros.model.SuperHero;
+import com.superhero.controller.SuperHeroRequest;
+import com.superhero.model.SuperHero;
 
 import java.util.List;
 

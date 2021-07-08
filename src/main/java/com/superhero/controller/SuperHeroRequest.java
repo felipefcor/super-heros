@@ -1,4 +1,4 @@
-package com.superheros.controller;
+package com.superhero.controller;
 
 import javax.validation.constraints.NotBlank;
 

@@ -1,4 +1,4 @@
-package com.superheros.model;
+package com.superhero.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
