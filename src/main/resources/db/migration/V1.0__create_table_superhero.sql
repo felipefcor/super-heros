@@ -1,4 +1,4 @@
-CREATE TABLE superHero (
+CREATE TABLE super_hero (
     id SERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     super_hero_name VARCHAR(100) NOT NULL,
