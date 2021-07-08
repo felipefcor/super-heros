@@ -40,8 +40,8 @@ public class SuperHeroService implements SuperHeroServiceInterface {
     }
 
     public void delete(Long id) {
-        SuperHero superHeroRetrieved = superHeroRepository.getById(id);
-        superHeroRepository.delete(superHeroRetrieved);
+        Optional<SuperHero> superHeroOptional =  superHeroRepository.findById(id);
+        superHeroOptional.ifPresent(superHero -> superHeroRepository.delete(superHero));
     }
 
     @Override
