@@ -2,7 +2,7 @@ version: '3'
 services:
   flyway:
     image: flyway/flyway
-    command: -url=jdbc:h2:mem://db -schemas=myschema -user=root -password=P@ssw0rd -connectRetries=60 migrate
+    command: -url=jdbc:h2:mem:~/superheros://db -schemas=myschema -user=root -password=P@ssw0rd -connectRetries=60 migrate
     volumes:
       - .:/flyway/sql
     depends_on:
@@ -12,4 +12,4 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=P@ssw0rd
     ports:
-      - 3306:3306
+      - 8088:8181
