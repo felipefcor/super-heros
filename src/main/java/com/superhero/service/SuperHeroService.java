@@ -14,8 +14,6 @@ import java.util.Optional;
 @Service
 public class SuperHeroService implements SuperHeroServiceInterface {
 
-    private static final String SUPER_HERO_NOT_FOUND = "Super Hero not found";
-
     @Autowired
     private SuperHeroRepository superHeroRepository;
 
@@ -29,7 +27,7 @@ public class SuperHeroService implements SuperHeroServiceInterface {
     public SuperHero findById(Long id) {
         Optional<SuperHero> superHeroOptional =  superHeroRepository.findById(id);
         if(superHeroOptional.isEmpty()) {
-            throw new SuperHeroNotFound(SUPER_HERO_NOT_FOUND);
+            throw new SuperHeroNotFound();
         } else {
             return superHeroOptional.get();
         }
@@ -39,7 +37,7 @@ public class SuperHeroService implements SuperHeroServiceInterface {
     public SuperHero update(Long id, SuperHeroRequest superHeroRequest) {
         Optional<SuperHero> superHeroOptional =  superHeroRepository.findById(id);
         if(superHeroOptional.isEmpty()) {
-            throw new SuperHeroNotFound(SUPER_HERO_NOT_FOUND);
+            throw new SuperHeroNotFound();
         } else {
             SuperHero superHeroDatabase = superHeroOptional.get();
             if(superHeroRequest.getName() != null) superHeroDatabase.setName(superHeroRequest.getName());
@@ -55,7 +53,7 @@ public class SuperHeroService implements SuperHeroServiceInterface {
     public void delete(Long id) {
         Optional<SuperHero> superHeroOptional =  superHeroRepository.findById(id);
         if(superHeroOptional.isEmpty()) {
-            throw new SuperHeroNotFound(SUPER_HERO_NOT_FOUND);
+            throw new SuperHeroNotFound();
         } else {
             superHeroRepository.delete(superHeroOptional.get());
         }
