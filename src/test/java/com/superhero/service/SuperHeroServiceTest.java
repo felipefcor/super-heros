@@ -103,6 +103,15 @@ class SuperHeroServiceTest {
 
         SuperHero superHeroResponse = superHeroService.update(1L, superHeroRequest);
 
+        ArgumentCaptor<SuperHero> captorSuperHero = ArgumentCaptor.forClass(SuperHero.class);
+
+        Mockito.verify(superHeroRepository, Mockito.times(1))
+                .save(captorSuperHero.capture());
+
+        SuperHero superHeroCaptured = captorSuperHero.getValue();
+
+        Assertions.assertEquals(newSuperHeroName, superHeroCaptured.getSuperHeroName());
+
         Assertions.assertEquals(superHero.getName(), superHeroResponse.getName());
         Assertions.assertEquals(superHeroRequest.getSuperHeroName(), superHeroResponse.getSuperHeroName());
         Assertions.assertEquals(superHero.getDescription(), superHeroResponse.getDescription());
