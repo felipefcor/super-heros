@@ -151,29 +151,26 @@ class SuperHeroServiceTest {
         String description = "Fuerza, rapidez y reflejos proporcionales a una araña. Capacidad de adherirse a casi cualquier superficie.";
         String comic = "Marvel";
         SuperHero superHero = new SuperHero(name, superHeroName, description, comic);
-
         String name2 = "Clark Kent";
-        String superHeroName2 = "'Superman'";
+        String superHeroName2 = "Superman";
         String description2 = "Fuerza sobrehumana, velocidad, resistencia, agilidad, reflejos, durabilidad, sentidos y longevidad. Poderes oculares. Agudeza sobrehumana. " +
                 "Visión de calor. Visión del espectro electromagnético. Visión microscópica. Aliento sobrehumano. Invulnerabilidad. Volar";
         String comic2 = "Marvel";
-
         SuperHero superHero2 = new SuperHero(name2, superHeroName2, description2, comic2);
-
+        String query = "man";
         List<SuperHero> superHeroList = Stream.of(superHero, superHero2).collect(Collectors.toList());
 
-        Mockito.when(superHeroRepository.findBySuperHeroNameContaining("man")).thenReturn(superHeroList);
+        Mockito.when(superHeroRepository.findBySuperHeroNameContaining(query)).thenReturn(superHeroList);
 
-        List<SuperHero> superHeroListResponse = superHeroService.findBySuperHeroNameBy("man");
+        List<SuperHero> superHeroListResponse = superHeroService.findBySuperHeroName(query);
 
-        Assertions.assertEquals(2, superHeroListResponse.size());
-        Assertions.assertEquals(superHeroList.get(0).getName(), superHeroListResponse.get(0).getName());
-        Assertions.assertEquals(superHeroList.get(0).getSuperHeroName(), superHeroListResponse.get(0).getSuperHeroName());
-        Assertions.assertEquals(superHeroList.get(0).getDescription(), superHeroListResponse.get(0).getDescription());
-        Assertions.assertEquals(superHeroList.get(0).getComic(), superHeroListResponse.get(0).getComic());
-        Assertions.assertEquals(superHeroList.get(1).getName(), superHeroListResponse.get(1).getName());
-        Assertions.assertEquals(superHeroList.get(1).getSuperHeroName(), superHeroListResponse.get(1).getSuperHeroName());
-        Assertions.assertEquals(superHeroList.get(1).getDescription(), superHeroListResponse.get(1).getDescription());
-        Assertions.assertEquals(superHeroList.get(1).getComic(), superHeroListResponse.get(1).getComic());
+        ArgumentCaptor<String> captorQuery = ArgumentCaptor.forClass(String.class);
+
+        Mockito.verify(superHeroRepository, Mockito.times(1))
+                .findBySuperHeroNameContaining(captorQuery.capture());
+
+        String queryCaptured = captorQuery.getValue();
+
+        Assertions.assertEquals(query, queryCaptured);
     }
 }

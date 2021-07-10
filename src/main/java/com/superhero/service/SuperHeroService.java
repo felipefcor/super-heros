@@ -60,7 +60,7 @@ public class SuperHeroService implements SuperHeroServiceInterface {
     }
 
     @Override
-    public List<SuperHero> findBySuperHeroNameBy(String query) {
+    public List<SuperHero> findBySuperHeroName(String query) {
         return superHeroRepository.findBySuperHeroNameContaining(query);
     }
 }

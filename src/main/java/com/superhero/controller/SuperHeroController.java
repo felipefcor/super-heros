@@ -44,7 +44,7 @@ public class SuperHeroController {
 
     @GetMapping("/findBySuperHeroNameBy/{query}")
     public ResponseEntity<List<SuperHero>> findBySuperHeroNameBy(@PathVariable String query) {
-        List<SuperHero> superHeroList = superHeroServiceInterface.findBySuperHeroNameBy(query);
+        List<SuperHero> superHeroList = superHeroServiceInterface.findBySuperHeroName(query);
         return new ResponseEntity<>(superHeroList, HttpStatus.OK);
     }
 }
