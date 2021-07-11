@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @Configuration
 @EnableWebSecurity
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    private static final String ADMIN = "ADMIN";
+    private static final String PATH = "/superhero/**";
 
     @Autowired
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
@@ -22,7 +24,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("12345")).roles("ADMIN")
+                .withUser("admin").password(passwordEncoder().encode("12345")).roles(ADMIN)
                 .and()
                 .withUser("user").password(passwordEncoder().encode("12345")).roles("USER");
     }
@@ -31,13 +33,13 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
-                .ignoringAntMatchers("/superhero/**")
+                .ignoringAntMatchers(PATH)
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.DELETE, "/superhero/**").hasRole("ADMIN")
-                .mvcMatchers(HttpMethod.PUT, "/superhero/**").hasRole("ADMIN")
-                .mvcMatchers(HttpMethod.PUT, "/superhero/**").hasRole("USER")
-                .mvcMatchers(HttpMethod.GET,"/superhero/**").permitAll()
+                .mvcMatchers(HttpMethod.DELETE, PATH).hasRole(ADMIN)
+                .mvcMatchers(HttpMethod.PUT, PATH).hasRole(ADMIN)
+                .mvcMatchers(HttpMethod.PUT, PATH).hasRole("USER")
+                .mvcMatchers(HttpMethod.GET,PATH).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
