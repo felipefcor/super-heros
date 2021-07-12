@@ -16,7 +16,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     private static final String ADMIN = "ADMIN";
-    private static final String PATH = "/superhero/**";
+    private static final String PATH_SUPERHERO = "/superhero/**";
+    private static final String PATH_H2 = "/h2-console/**";
 
     @Autowired
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
@@ -31,15 +32,21 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf()
-                .ignoringAntMatchers(PATH)
+                .ignoringAntMatchers(PATH_SUPERHERO, PATH_H2)
+                .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
                 .and()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.DELETE, PATH).hasRole(ADMIN)
-                .mvcMatchers(HttpMethod.PUT, PATH).hasRole(ADMIN)
-                .mvcMatchers(HttpMethod.PUT, PATH).hasRole("USER")
-                .mvcMatchers(HttpMethod.GET,PATH).permitAll()
+                .mvcMatchers(HttpMethod.DELETE, PATH_SUPERHERO).hasRole(ADMIN)
+                .mvcMatchers(HttpMethod.PUT, PATH_SUPERHERO).hasRole(ADMIN)
+                .mvcMatchers(HttpMethod.PUT, PATH_SUPERHERO).hasRole("USER")
+                .mvcMatchers(HttpMethod.GET, PATH_SUPERHERO).permitAll()
+                .mvcMatchers(PATH_H2).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
